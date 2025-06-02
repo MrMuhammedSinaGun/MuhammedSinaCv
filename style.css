@@ -9,6 +9,30 @@ body.dark-body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(transparent, transparent 2px, rgba(0,255,255,0.05) 2px, rgba(0,255,255,0.05) 4px);
+  z-index: 0;
+  animation: bgScroll 15s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes bgScroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
 /* --- HERO --- */
 .hero-section {
   padding: 60px 20px;
@@ -51,6 +75,27 @@ body.dark-body {
   font-size: 36px;
   text-shadow: 0 0 5px #00f7ff, 0 0 10px #007777;
   animation: flicker 2s infinite alternate;
+  position: relative;
+}
+
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: #00ffff80;
+  z-index: -1;
+  animation: glitch 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% { clip: rect(0, 9999px, 0, 0); }
+  10% { clip: rect(0, 9999px, 30px, 0); }
+  20% { clip: rect(0, 9999px, 5px, 0); }
+  30% { clip: rect(10px, 9999px, 50px, 0); }
+  40% { clip: rect(5px, 9999px, 20px, 0); }
+  50% { clip: rect(25px, 9999px, 55px, 0); }
+  100% { clip: rect(0, 9999px, 0, 0); }
 }
 
 @keyframes flicker {
@@ -82,12 +127,13 @@ body.dark-body {
   color: #00f7ff;
   margin: 0 12px;
   font-size: 26px;
-  transition: color 0.3s, transform 0.3s;
+  transition: color 0.3s, transform 0.3s, text-shadow 0.3s;
 }
 
 .social-links a:hover {
   color: #ffffff;
   transform: scale(1.2);
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff, 0 0 30px #00f7ff;
 }
 
 /* --- BUTON --- */
@@ -108,6 +154,7 @@ body.dark-body {
   background: #00f7ff;
   color: #000;
   box-shadow: 0 0 20px #00f7ffaa;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
 }
 
 /* --- PANEL --- */
@@ -154,10 +201,11 @@ body.dark-body {
 /* --- ALT BİLGİ --- */
 .footer-dark {
   font-size: 14px;
-  color: #444;
+  color: #00f7ff99;
   padding: 25px;
   border-top: 1px solid #00f7ff33;
   margin-top: 60px;
+  text-shadow: 0 0 3px #00f7ff44;
 }
 
 /* --- ANİMASYONLAR --- */
