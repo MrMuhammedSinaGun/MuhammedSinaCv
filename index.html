@@ -1,446 +1,183 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammed Sina Gün - Kişisel Web Sitesi</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Muhammed Sina Gün | Bilgisayar Mühendisi</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;500&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            font-family: 'Roboto Mono', monospace;
+            background: #000;
+            color: #0f0;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            position: relative;
         }
-
-        /* Animated Background Particles */
-        .particles {
+        
+        /* Matrix Rain Effect */
+        .matrix-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             z-index: -1;
+            opacity: 0.1;
         }
-
-        .particle {
+        
+        .matrix-column {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            top: -100vh;
+            color: #0f0;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            line-height: 1.2;
+            white-space: nowrap;
+            animation: matrix-fall linear infinite;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+        
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
         }
-
+        
         /* Header */
-        header {
+        .header {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #0f0;
+            padding: 1rem 2rem;
             z-index: 1000;
             transition: all 0.3s ease;
         }
-
-        nav {
+        
+        .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
         }
-
+        
         .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
             font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
+            color: #0f0;
+            text-shadow: 0 0 10px #0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
+        
         .logo:hover {
-            transform: scale(1.05);
+            text-shadow: 0 0 20px #0f0, 0 0 30px #0f0;
         }
-
+        
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
-
+        
         .nav-links a {
-            color: white;
+            color: #0f0;
             text-decoration: none;
-            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
         }
-
+        
         .nav-links a:hover {
-            color: #ffd700;
-            transform: translateY(-2px);
+            border: 1px solid #0f0;
+            box-shadow: 0 0 10px #0f0;
+            background: rgba(0, 255, 0, 0.1);
         }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #ffd700;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 2rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffd700, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
-        }
-
-        .hero h2 {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.5s forwards;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1s forwards;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1.5s forwards;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #ff6b6b, #ffd700);
-            color: white;
-            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 6px 30px rgba(255, 107, 107, 0.6);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 2rem;
+        
+        /* Main Container */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
-
-        .section-title {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            color: white;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(45deg, #ff6b6b, #ffd700);
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-image {
-            text-align: center;
-        }
-
-        .profile-img {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05) rotate(5deg);
-        }
-
-        .about-text {
-            color: white;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .skill-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ff6b6b, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .skill-card h3 {
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-card p {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 2rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info {
-            color: white;
-        }
-
-        .contact-item {
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateX(10px);
-        }
-
-        .contact-item i {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            color: #ffd700;
-            width: 30px;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            color: white;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ffd700;
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2rem;
-            text-align: center;
-            color: white;
-            backdrop-filter: blur(10px);
-        }
-
-        .social-links {
-            display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
         }
-
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            padding: 10px;
+        
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid #0f0;
+            box-shadow: 0 0 30px #0f0;
+            margin: 0 auto 2rem;
+            transition: all 0.3s ease;
+            filter: brightness(1.1) contrast(1.2);
         }
-
-        .social-links a:hover {
-            color: #ffd700;
-            transform: translateY(-5px) scale(1.1);
-            background: rgba(255, 215, 0, 0.2);
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px #0f0;
         }
-
-        /* Animations */
+        
+        .hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #0f0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .typing-effect {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            height: 1.5rem;
+            overflow: hidden;
+            border-right: 2px solid #0f0;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #0f0; }
+            to { text-shadow: 0 0 30px #0f0, 0 0 40px #0f0; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #0f0; }
+            51%, 100% { border-color: transparent; }
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -451,65 +188,219 @@
                 transform: translateY(0);
             }
         }
-
-        /* Responsive Design */
+        
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 2px solid #0f0;
+            color: #0f0;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 20px #0f0;
+            transform: translateY(-2px);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+            transition: all 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: rgba(0, 20, 0, 0.3);
+            border-top: 1px solid #0f0;
+            border-bottom: 1px solid #0f0;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 0 0 15px #0f0;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .about-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #0f0;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+        }
+        
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: #0f0;
+            transition: all 0.5s;
+        }
+        
+        .about-card:hover::before {
+            left: 0;
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #0f0;
+        }
+        
+        /* Skills Section */
+        .skills {
+            padding: 6rem 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-item {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #0f0;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .skill-item:hover {
+            background: rgba(0, 255, 0, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: rgba(0, 20, 0, 0.3);
+            border-top: 1px solid #0f0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-item {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #0f0;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+        
+        .contact-item a {
+            color: #0f0;
+            text-decoration: none;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #0f0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero h2 {
-                font-size: 1.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll Animation */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .scroll-animate.active {
-            opacity: 1;
-            transform: translateY(0);
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .nav-links { display: none; }
+            .btn-group { flex-direction: column; align-items: center; }
+            .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="particles" id="particles"></div>
-
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    
     <!-- Header -->
-    <header>
-        <nav>
-            <a href="#" class="logo">Muhammed Sina</a>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">MSG</div>
             <ul class="nav-links">
                 <li><a href="#home">Ana Sayfa</a></li>
                 <li><a href="#about">Hakkımda</a></li>
@@ -518,141 +409,187 @@
             </ul>
         </nav>
     </header>
-
+    
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Muhammed Sina Gün</h1>
-            <h2>Bilgisayar Mühendisliği Öğrencisi | Yönetim Bilişim Sistemleri</h2>
-            <p>Kod yazma, sistem tasarımı, yapay zeka ve siber güvenlik alanlarında kendimi geliştiren, teknoloji tutkunu bir mühendislik öğrencisiyim.</p>
-            <div class="cta-buttons">
-                <a href="#about" class="btn btn-primary">Hakkımda</a>
-                <a href="#contact" class="btn btn-secondary">İletişime Geç</a>
+        <div class="container">
+            <div class="hero-content">
+                <img src="https://avatars.githubusercontent.com/u/145281408?v=4" alt="Muhammed Sina Gün" class="profile-img">
+                <h1>MUHAMMED SİNA GÜN</h1>
+                <p class="subtitle">Bilgisayar Mühendisliği Öğrencisi</p>
+                <div class="typing-effect" id="typingText"></div>
+                <div class="btn-group">
+                    <a href="#about" class="btn">HAKKIMDA</a>
+                    <a href="#contact" class="btn">İLETİŞİM</a>
+                    <a href="mailto:muhammedsina47@outlook.com" class="btn">E-POSTA</a>
+                </div>
             </div>
         </div>
+        <div class="scroll-indicator">
+            <div style="color: #0f0; font-size: 2rem;">↓</div>
+        </div>
     </section>
-
+    
     <!-- About Section -->
-    <section id="about" class="about scroll-animate">
-        <h2 class="section-title">Hakkımda</h2>
-        <div class="about-content">
-            <div class="about-image">
-                <img src="https://via.placeholder.com/250x250/4A90E2/FFFFFF?text=Profil+Foto" alt="Profil Fotoğrafı" class="profile-img">
-            </div>
-            <div class="about-text">
-                <p>Merhaba! Ben Muhammed Sina Gün, İstanbul Arel Üniversitesi'nde Bilgisayar Mühendisliği ve Anadolu Üniversitesi'nde Yönetim Bilişim Sistemleri okuyorum. 2022 yılında Mardin Final Lisesi'nden mezun oldum ve şu anda İstanbul'da yaşıyorum.</p>
-                
-                <p>Teknolojiye olan tutkum özellikle kod yazma, sistem tasarımı, yapay zeka ve siber güvenlik alanlarında yoğunlaşıyor. Her gün yeni şeyler öğrenmeye ve edindiğim bilgileri pratik projelerle pekiştirmeye odaklanıyorum.</p>
-                
-                <p>Hem teknik hem de yönetimsel becerilerimi geliştirerek, gelecekte bu iki alanın kesişiminde yenilikçi çözümler üreten bir mühendis olmayı planlıyorum.</p>
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">// HAKKIMDA</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">EĞİTİM</h3>
+                    <p>İstanbul Arel Üniversitesi - Bilgisayar Mühendisliği</p>
+                    <p>Anadolu Üniversitesi - Yönetim Bilişim Sistemleri</p>
+                    <p>Mardin Final Lisesi Mezunu (2022)</p>
+                </div>
+                <div class="about-card">
+                    <span class="card-icon">💻</span>
+                    <h3 class="card-title">İLGİ ALANLARI</h3>
+                    <p>• Kod Yazma & Geliştirme</p>
+                    <p>• Sistem Tasarımı</p>
+                    <p>• Yapay Zeka</p>
+                    <p>• Siber Güvenlik</p>
+                </div>
+                <div class="about-card">
+                    <span class="card-icon">🌍</span>
+                    <h3 class="card-title">KONUM</h3>
+                    <p>İstanbul, Türkiye</p>
+                    <p>Aktif öğrenci ve geliştiriciyim. Teknoloji dünyasındaki yenilikleri takip ediyor ve sürekli kendimi geliştiriyorum.</p>
+                </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Skills Section -->
-    <section id="skills" class="skills scroll-animate">
-        <h2 class="section-title">Yeteneklerim</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fas fa-code skill-icon"></i>
-                <h3>Yazılım Geliştirme</h3>
-                <p>Modern programlama dilleri ve framework'ler ile yazılım çözümleri geliştiriyorum.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-cogs skill-icon"></i>
-                <h3>Sistem Tasarımı</h3>
-                <p>Ölçeklenebilir ve verimli sistem mimarileri tasarlama konusunda uzmanlaşıyorum.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-brain skill-icon"></i>
-                <h3>Yapay Zeka</h3>
-                <p>Machine learning ve deep learning teknolojileri ile akıllı sistemler geliştiriyorum.</p>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-shield-alt skill-icon"></i>
-                <h3>Siber Güvenlik</h3>
-                <p>Bilgi güvenliği ve siber tehditlerden korunma konularında kendimi geliştiriyorum.</p>
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">// YETENEKLER</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">⚡</div>
+                    <h3>Kod Yazma</h3>
+                    <p>Modern programlama dilleri ve teknolojiler</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🔧</div>
+                    <h3>Sistem Tasarımı</h3>
+                    <p>Scalable ve efficient sistem mimarileri</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🤖</div>
+                    <h3>Yapay Zeka</h3>
+                    <p>Machine Learning ve AI uygulamaları</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🛡️</div>
+                    <h3>Siber Güvenlik</h3>
+                    <p>Network security ve vulnerability assessment</p>
+                </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Contact Section -->
-    <section id="contact" class="contact scroll-animate">
-        <h2 class="section-title">İletişim</h2>
-        <div class="contact-content">
-            <div class="contact-info">
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">// İLETİŞİM</h2>
+            <div class="contact-grid">
                 <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>muhammedsina47@outlook.com</span>
+                    <h3>📧 E-POSTA</h3>
+                    <a href="mailto:muhammedsina47@outlook.com">muhammedsina47@outlook.com</a>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+90 543 724 59 85</span>
+                    <h3>📞 TELEFON</h3>
+                    <a href="tel:+905437245985">+90 543 724 59 85</a>
                 </div>
                 <div class="contact-item">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp ile mesaj gönder</span>
+                    <h3>💬 WHATSAPP</h3>
+                    <a href="https://wa.me/905437245985" target="_blank">Mesaj Gönder</a>
                 </div>
                 <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>İstanbul, Türkiye</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>İstanbul Arel Üniversitesi</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-university"></i>
-                    <span>Anadolu Üniversitesi</span>
+                    <h3>📍 KONUM</h3>
+                    <p>İstanbul, Türkiye</p>
                 </div>
             </div>
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="name">Ad Soyad</label>
-                    <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-posta</label>
-                    <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mesaj</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Mesaj Gönder</button>
-            </form>
         </div>
     </section>
-
+    
     <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Muhammed Sina Gün. Tüm hakları saklıdır.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">Matrix themed portfolio • Designed with passion</p>
         </div>
-        <p>&copy; 2025 Muhammed Sina Gün. Tüm hakları saklıdır.</p>
     </footer>
-
+    
     <script>
-        // Animated particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                particlesContainer.appendChild(particle);
+        // Matrix Rain Effect
+        function createMatrixRain() {
+            const matrixBg = document.getElementById('matrixBg');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = i * 20 + 'px';
+                column.style.animationDuration = Math.random() * 3 + 2 + 's';
+                column.style.animationDelay = Math.random() * 2 + 's';
+                
+                let text = '';
+                for (let j = 0; j < 20; j++) {
+                    text += characters[Math.floor(Math.random() * characters.length)] + '<br>';
+                }
+                column.innerHTML = text;
+                
+                matrixBg.appendChild(column);
             }
         }
-
-        // Smooth scrolling
+        
+        // Typing Effect
+        function typeWriter() {
+            const texts = [
+                'Kod yazarak geleceği inşa ediyorum...',
+                'Sistemlerin arkasındaki mantığı çözüyorum...',
+                'Yapay zeka ile sınırları aşıyorum...',
+                'Siber güvenlik ile dijital dünyayı koruyorum...'
+            ];
+            
+            const typingElement = document.getElementById('typingText');
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            
+            function type() {
+                const currentText = texts[textIndex];
+                
+                if (isDeleting) {
+                    typingElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingElement.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                
+                let typeSpeed = isDeleting ? 30 : 50;
+                
+                if (!isDeleting && charIndex === currentText.length) {
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    typeSpeed = 500;
+                }
+                
+                setTimeout(type, typeSpeed);
+            }
+            
+            type();
+        }
+        
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -665,68 +602,28 @@
                 }
             });
         });
-
-        // Scroll animations
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.scroll-animate');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('active');
-                }
-            });
-        }
-
-        // Header background on scroll
-        function handleHeaderScroll() {
-            const header = document.querySelector('header');
+        
+        // Header Background on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
             if (window.scrollY > 100) {
-                header.style.background = 'rgba(0, 0, 0, 0.8)';
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
             } else {
-                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
             }
-        }
-
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Mesajınız alındı! En kısa sürede size dönüş yapacağım.');
-            this.reset();
         });
-
+        
         // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            animateOnScroll();
-            
-            window.addEventListener('scroll', function() {
-                animateOnScroll();
-                handleHeaderScroll();
-            });
+        window.addEventListener('load', () => {
+            createMatrixRain();
+            typeWriter();
         });
-
-        // Typing effect for hero title
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            type();
-        }
-
-        // Initialize typing effect
-        setTimeout(() => {
-            const heroTitle = document.querySelector('.hero h1');
-            const originalText = heroTitle.textContent;
-            typeWriter(heroTitle, originalText, 150);
-        }, 500);
+        
+        // Responsive Matrix Rain
+        window.addEventListener('resize', () => {
+            document.getElementById('matrixBg').innerHTML = '';
+            createMatrixRain();
+        });
     </script>
 </body>
 </html>
