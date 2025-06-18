@@ -1,316 +1,732 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Muhammed Sina Gün</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    rel="stylesheet"
-  />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary-color: #58a6ff;
-      --background-dark: #0d1117;
-      --background-section: #161b22;
-      --text-color: #c9d1d9;
-      --text-muted: #8b949e;
-      --border-color: #30363d;
-      --hover-bg: #58a6ff;
-      --hover-text: #000;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammed Sina Gün - Kişisel Web Sitesi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
 
-    body {
-      margin: 0;
-      background: var(--background-dark);
-      color: var(--text-color);
-      font-family: 'Poppins', Consolas, monospace;
-      scroll-behavior: smooth;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-      background: var(--background-section);
-      border-radius: 15px;
-      width: 100%;
-      max-width: 900px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
-    }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
 
-    header img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 4px solid var(--primary-color);
-      transition: transform 0.3s ease;
-      object-fit: cover;
-    }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+        }
 
-    header img:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 0 15px var(--primary-color);
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
 
-    h1 {
-      margin: 20px 0 5px;
-      font-size: 36px;
-      font-weight: 600;
-      color: var(--primary-color);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-    .typed {
-      color: var(--text-muted);
-      font-size: 18px;
-      height: 28px;
-      font-weight: 400;
-      min-height: 28px;
-      margin-bottom: 20px;
-      font-style: italic;
-      user-select: none;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
 
-    .social {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
-    .social a {
-      color: var(--text-color);
-      font-size: 26px;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-    .social a:hover {
-      color: var(--primary-color);
-      transform: translateY(-5px);
-      filter: drop-shadow(0 0 6px var(--primary-color));
-    }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-    nav {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
 
-    nav button {
-      background: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-      border-radius: 8px;
-      padding: 12px 28px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 16px;
-      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      outline-offset: 3px;
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #ffd700;
+            transition: width 0.3s ease;
+        }
 
-    nav button:hover,
-    nav button:focus-visible {
-      background-color: var(--hover-bg);
-      color: var(--hover-text);
-      box-shadow: 0 0 10px var(--primary-color);
-      outline: none;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    section {
-      display: none;
-      max-width: 800px;
-      margin: 40px auto;
-      background: var(--background-section);
-      padding: 30px 40px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
 
-    section.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
 
-    h2 {
-      font-size: 28px;
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
 
-    ul {
-      padding-left: 20px;
-      line-height: 1.6;
-      font-size: 18px;
-    }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+        }
 
-    ul li {
-      margin-bottom: 12px;
-    }
+        .hero h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
 
-    a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
+        }
 
-    a:hover,
-    a:focus {
-      color: var(--hover-bg);
-      text-decoration: underline;
-    }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.5s forwards;
+        }
 
-    footer {
-      text-align: center;
-      padding: 25px 10px;
-      font-size: 14px;
-      color: #666;
-      margin-top: auto;
-      user-select: none;
-    }
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @media (max-width: 600px) {
-      header img {
-        width: 90px;
-        height: 90px;
-      }
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #ffd700);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+        }
 
-      h1 {
-        font-size: 28px;
-      }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
 
-      .typed {
-        font-size: 14px;
-        height: 22px;
-      }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
 
-      nav button {
-        padding: 10px 15px;
-        font-size: 14px;
-      }
+        .btn-primary:hover {
+            box-shadow: 0 6px 30px rgba(255, 107, 107, 0.6);
+        }
 
-      section {
-        padding: 20px 15px;
-      }
-    }
-  </style>
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd700);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .about-text {
+            color: white;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-card p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            color: white;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: #ffd700;
+            width: 30px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: #ffd700;
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="https://avatars.githubusercontent.com/u/145281408?v=4" alt="Profil" />
-    <h1>MUHAMMED SİNA GÜN</h1>
-    <div class="typed" id="typed-text"></div>
+    <!-- Animated Background -->
+    <div class="particles" id="particles"></div>
 
-    <div class="social" aria-label="Sosyal medya bağlantıları">
-      <a href="https://github.com/MrMuhammedSinaGun" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/muhammed-sina-gün-5335b9290" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-      <a href="https://instagram.com/gunmuhammedsina" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/MuhammedSinaGun" aria-label="X Twitter"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://wa.me/905437245985" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-    </div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Muhammed Sina</a>
+            <ul class="nav-links">
+                <li><a href="#home">Ana Sayfa</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#skills">Yetenekler</a></li>
+                <li><a href="#contact">İletişim</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <nav role="navigation" aria-label="Site içi menü">
-      <button onclick="show('about')" aria-controls="about" aria-expanded="false">Hakkımda</button>
-      <button onclick="show('projects')" aria-controls="projects" aria-expanded="false">Projeler</button>
-      <button onclick="show('contact')" aria-controls="contact" aria-expanded="false">İletişim</button>
-      <button onclick="window.open('cv.pdf')" aria-label="CV indir">CV İndir</button>
-    </nav>
-  </header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Muhammed Sina Gün</h1>
+            <h2>Bilgisayar Mühendisliği Öğrencisi | Yönetim Bilişim Sistemleri</h2>
+            <p>Kod yazma, sistem tasarımı, yapay zeka ve siber güvenlik alanlarında kendimi geliştiren, teknoloji tutkunu bir mühendislik öğrencisiyim.</p>
+            <div class="cta-buttons">
+                <a href="#about" class="btn btn-primary">Hakkımda</a>
+                <a href="#contact" class="btn btn-secondary">İletişime Geç</a>
+            </div>
+        </div>
+    </section>
 
-  <section id="about" tabindex="-1" aria-hidden="true">
-    <h2>🧠 Hakkımda</h2>
-    <p>
-      Ben Muhammed Sina Gün. İstanbul Arel Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Aynı zamanda Anadolu Üniversitesi’nde Yönetim Bilişim Sistemleri okuyorum. Kod yazmak, sistem tasarımı, yapay zeka ve siber güvenlik ile ilgileniyorum.
-    </p>
-    <ul>
-      <li>🎓 İstanbul Arel Üniversitesi – Bilgisayar Mühendisliği</li>
-      <li>📘 Anadolu Üniversitesi – Yönetim Bilişim Sistemleri</li>
-      <li>🏫 Mardin Final Lisesi Mezunu (2022)</li>
-      <li>🌍 İstanbul'da yaşıyor</li>
-    </ul>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="about scroll-animate">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="https://via.placeholder.com/250x250/4A90E2/FFFFFF?text=Profil+Foto" alt="Profil Fotoğrafı" class="profile-img">
+            </div>
+            <div class="about-text">
+                <p>Merhaba! Ben Muhammed Sina Gün, İstanbul Arel Üniversitesi'nde Bilgisayar Mühendisliği ve Anadolu Üniversitesi'nde Yönetim Bilişim Sistemleri okuyorum. 2022 yılında Mardin Final Lisesi'nden mezun oldum ve şu anda İstanbul'da yaşıyorum.</p>
+                
+                <p>Teknolojiye olan tutkum özellikle kod yazma, sistem tasarımı, yapay zeka ve siber güvenlik alanlarında yoğunlaşıyor. Her gün yeni şeyler öğrenmeye ve edindiğim bilgileri pratik projelerle pekiştirmeye odaklanıyorum.</p>
+                
+                <p>Hem teknik hem de yönetimsel becerilerimi geliştirerek, gelecekte bu iki alanın kesişiminde yenilikçi çözümler üreten bir mühendis olmayı planlıyorum.</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="projects" tabindex="-1" aria-hidden="true">
-    <h2>🛠️ Projeler</h2>
-    <ul>
-      <li><strong>KobiFatura:</strong> C++ ile geliştirilen ön muhasebe ve fatura yönetimi</li>
-      <li><strong>AI-BorsaBot:</strong> Python ile yapay zeka destekli hisse senedi al-sat botu</li>
-      <li><strong>SmartHome:</strong> ESP8266 ile ev otomasyon sistemi</li>
-      <li><strong>Yapay Dil (ConLang):</strong> Matematiksel kurallı özgün yapay dil</li>
-      <li><strong>Web CV Sayfası:</strong> HTML/CSS/JS ile oluşturulmuş kişisel web sitesi</li>
-    </ul>
-  </section>
+    <!-- Skills Section -->
+    <section id="skills" class="skills scroll-animate">
+        <h2 class="section-title">Yeteneklerim</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fas fa-code skill-icon"></i>
+                <h3>Yazılım Geliştirme</h3>
+                <p>Modern programlama dilleri ve framework'ler ile yazılım çözümleri geliştiriyorum.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-cogs skill-icon"></i>
+                <h3>Sistem Tasarımı</h3>
+                <p>Ölçeklenebilir ve verimli sistem mimarileri tasarlama konusunda uzmanlaşıyorum.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-brain skill-icon"></i>
+                <h3>Yapay Zeka</h3>
+                <p>Machine learning ve deep learning teknolojileri ile akıllı sistemler geliştiriyorum.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-shield-alt skill-icon"></i>
+                <h3>Siber Güvenlik</h3>
+                <p>Bilgi güvenliği ve siber tehditlerden korunma konularında kendimi geliştiriyorum.</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="contact" tabindex="-1" aria-hidden="true">
-    <h2>📩 İletişim</h2>
-    <ul>
-      <li>📧 E-posta: <a href="mailto:muhammedsina47@outlook.com">muhammedsina47@outlook.com</a></li>
-      <li>📞 Telefon: <a href="tel:+905437245985">+90 543 724 59 85</a></li>
-      <li>💬 WhatsApp: <a href="https://wa.me/905437245985" target="_blank" rel="noopener noreferrer">Mesaj Gönder</a></li>
-      <li>📍 İstanbul, Türkiye</li>
-    </ul>
-    <p><a href="cv.pdf" download>📄 CV’yi İndir</a></p>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="contact scroll-animate">
+        <h2 class="section-title">İletişim</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>muhammedsina47@outlook.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+90 543 724 59 85</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp ile mesaj gönder</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>İstanbul, Türkiye</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>İstanbul Arel Üniversitesi</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-university"></i>
+                    <span>Anadolu Üniversitesi</span>
+                </div>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Ad Soyad</label>
+                    <input type="text" id="name" name="name" placeholder="Adınızı girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-posta</label>
+                    <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mesaj</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Mesajınızı yazın" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Mesaj Gönder</button>
+            </form>
+        </div>
+    </section>
 
-  <footer>
-    ⛓️ Sina © 2025 — Tüm hakları dijital olarak korunmuştur.
-  </footer>
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 Muhammed Sina Gün. Tüm hakları saklıdır.</p>
+    </footer>
 
-  <script>
-    const sections = ['about', 'projects', 'contact'];
-    function show(id) {
-      sections.forEach(s => {
-        const el = document.getElementById(s);
-        const btn = document.querySelector(`nav button[onclick="show('${s}')"]`);
-        if (s === id) {
-          el.classList.add('active');
-          el.setAttribute('aria-hidden', 'false');
-          btn.setAttribute('aria-expanded', 'true');
-          el.focus();
-        } else {
-          el.classList.remove('active');
-          el.setAttribute('aria-hidden', 'true');
-          btn.setAttribute('aria-expanded', 'false');
+    <script>
+        // Animated particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
         }
-      });
-    }
-    show('about'); // Default görünüm
 
-    // Yazı animasyonu (typed effect)
-    const text = "Cyber Mühendis • Kod Avcısı • Sistem Yıkıcı • Gece Çalışanı";
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        document.getElementById("typed-text").textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 50);
-      }
-    }
-    window.onload = type;
-  </script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.scroll-animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        // Header background on scroll
+        function handleHeaderScroll() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        }
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Mesajınız alındı! En kısa sürede size dönüş yapacağım.');
+            this.reset();
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            animateOnScroll();
+            
+            window.addEventListener('scroll', function() {
+                animateOnScroll();
+                handleHeaderScroll();
+            });
+        });
+
+        // Typing effect for hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect
+        setTimeout(() => {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            typeWriter(heroTitle, originalText, 150);
+        }, 500);
+    </script>
 </body>
 </html>
